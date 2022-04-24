@@ -1,0 +1,23 @@
+{% extends 'file_archive/base.html' %}
+
+{% load static %}
+{% load poll_extras %}
+
+{% block content %}
+  <div class="container mt-3">
+      {% for tag in tags %}
+          <li>
+            <h3><a href="{% url 'archive:tag_archive_list' tag.slug %}">{{ tag.name }}</a></h3>
+          </li>
+      {% endfor %}
+  </div>
+
+  <div class="container mt-3">
+        {% for archive in archives %}
+            <h1>File: {{ archive.file.name }}</h1>
+            <h3>Name: {{ archive.user.username }}</h3>
+            <h3>Attribute: {{ archive.tags.all | tags_name_href | safe }}</h3>
+            <h3><a href="{{ archive.file.url }}">Download</a></h3>
+        {% endfor %}
+  </div>
+{% endblock %}
