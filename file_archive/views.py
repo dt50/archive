@@ -2,9 +2,13 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from .models import Archive
 from taggit.models import Tag
+from django.http import JsonResponse
 
 # Create your views here.
 
+
+def is_ajax(request):
+    return request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
 
 class ArchiveView(ListView):
     model = Archive
@@ -26,8 +30,8 @@ class TagArchiveView(ListView):
         return Archive.objects.filter(tags__slug=self.kwargs.get('slug'))
 
 
-def main_view(request):
-    return render(request, 'file_archive/main.html', {})
+def main(request):
+    return render(request, 'file_archive/main_.html', {})
 
 
 def game_detail_view(request, pk):
@@ -35,4 +39,29 @@ def game_detail_view(request, pk):
 
 
 def search_results(request):
-    pass
+    if is_ajax(request):
+        res = None
+        game = request.POST.get('game').split(' ')
+
+        qs = [Archive.objects.filter(tags__name__icontains=x) for x in ' '.join(game).split()]
+
+        if len(qs) > 0 and len(game) > 0:
+            data = []
+            for poses in qs:
+                for pos in poses:
+                    item = {
+                        'name': pos.file.name,
+                        'attributes': list(pos.tags.names()),
+                        'download': str(pos.file.url)
+                    }
+
+                    if item in data:
+                        continue
+                    data.append(item)
+
+                res = data
+        else:
+            res = 'No files found ...'
+
+        return JsonResponse({'data': res})
+    return JsonResponse({})
