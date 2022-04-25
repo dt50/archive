@@ -10,6 +10,7 @@ from django.http import JsonResponse
 def is_ajax(request):
     return request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
 
+
 class ArchiveView(ListView):
     model = Archive
     template_name = 'file_archive/archive_list.html'
@@ -29,13 +30,10 @@ class TagArchiveView(ListView):
     def get_queryset(self):
         return Archive.objects.filter(tags__slug=self.kwargs.get('slug'))
 
-
-def main(request):
-    return render(request, 'file_archive/main_.html', {})
-
-
-def game_detail_view(request, pk):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super(TagArchiveView, self).get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
 
 
 def search_results(request):
@@ -45,7 +43,7 @@ def search_results(request):
 
         qs = [Archive.objects.filter(tags__name__icontains=x) for x in ' '.join(game).split()]
 
-        if len(qs) > 0 and len(game) > 0:
+        if len(qs) > 0 and len(game) > 0 and len(qs[0].values()) != 0:
             data = []
             for poses in qs:
                 for pos in poses:

@@ -1,4 +1,3 @@
-{% extends 'file_archive/base.html' %}
 {% load static %}
 
 {% block scripts %}
@@ -7,14 +6,13 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-3">
+    <div class="col-lg-8 mx-auto">
         <div class="w-100 text-center">
             <form id="search-form" autocomplete="off">
                 {% csrf_token %}
-                <input type="text" id="search-input" class="p-3 w-50 search" placeholder="search for games">
+                <input type="text" id="search-input" class="p-3 w-50 search-focus" placeholder="Введите атрибуты для поиска">
             </form>
             <div id="results-box" class="results-card not-visible">
-
             </div>
         </div>
     </div>

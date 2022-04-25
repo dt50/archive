@@ -8,7 +8,6 @@ from taggit.managers import TaggableManager
 
 class Archive(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
     file = models.FileField()
     timestamp = models.DateTimeField(auto_now_add=True, blank=True)
     tags = TaggableManager()
