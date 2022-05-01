@@ -2,3 +2,16 @@
 /static/admin/
 /file_archive/migrations/
 /media/*
+__pycache__
+/.idea
+/123/.DS_Store
+/123/base/.DS_Store
+/static/.DS_Store
+/static/file_archive/.DS_Store
+/static/file_archive/base/.DS_Store
+/static/file_archive/base/bootstrap/.DS_Store
+/static/file_archive/list_tags/.DS_Store
+/static/file_archive/list_tags/bootstrap/.DS_Store
+/templates/.DS_Store
+/templates/file_archive/.DS_Store
+/.DS_Store
