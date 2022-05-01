@@ -13,7 +13,7 @@ def is_ajax(request):
 
 class ArchiveView(ListView):
     model = Archive
-    template_name = 'file_archive/archive_list.html'
+    template_name = 'file_archive/base.html'
     context_object_name = 'archives'
 
     def get_context_data(self, **kwargs):
@@ -24,7 +24,7 @@ class ArchiveView(ListView):
 
 class TagArchiveView(ListView):
     model = Archive
-    template_name = 'file_archive/archive_list.html'
+    template_name = 'file_archive/base.html'
     context_object_name = 'archives'
 
     def get_queryset(self):

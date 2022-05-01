@@ -1,5 +1,5 @@
 .search-focus {
-    background-color: #6c6b6b;
+    background-color: #e8e8e8;
 }
 
 .not-visible {
@@ -17,19 +17,4 @@
 
 .item {
     text-decoration: none
-}
-li{
-    font-size: 3vmin;
-
-}
-nav-item{
-    color: #000000;
-}
-body{
-    background-color: #d5cdcd;
-}
-#search{
-    margin-left: 12%;
-
-    max-block-size: 50%;
 }
