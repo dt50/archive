@@ -3,6 +3,7 @@ const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input')
 const resultBox = document.getElementById('results-box')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+const searchDate = document.getElementsByClassName('search-date')
 
 const sendSearchData = (game) => {
     $.ajax({
@@ -20,11 +21,11 @@ const sendSearchData = (game) => {
                 data.forEach(files => {
                     resultBox.innerHTML += `
                         <a href="${files.download}" class="item">
-                            <div class="row mt-2 mb-2">
-                                <div class="col-10">
+                            <div class="py-5">
+                                <div class="py-2">
                                     <h6>${files.name}</h6>
                                 </div>
-                                <div class="col-10">
+                                <div class="py-3">
                                     <p class="text-muted">${files.attributes.join(', ')}</p>
                                 </div>
                             </div>
@@ -35,7 +36,7 @@ const sendSearchData = (game) => {
                 if (searchInput.value.length > 0 ) {
                     resultBox.innerHTML = `<b>${data}</b>`
                 } else {
-                    resultBox.classList.add('not-visible')
+                    resultBox.innerHTML = ''
                 }
             }
         },
@@ -53,4 +54,3 @@ searchInput.addEventListener('keyup', e=>{
 
     sendSearchData(e.target.value)
 })
-
